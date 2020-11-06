@@ -1,0 +1,93 @@
+*, *::before, *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  min-height: 100vh;
+  background-color: navy;
+  font-family: 'Nunito', sans-serif;
+}
+
+.text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: ivory;
+  width: 525px;
+  border: 2px solid #333;
+  background-color: black;
+}
+
+.text h3 {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 63px;
+  margin-left: 70px;
+}
+
+.text h3.blackKeys {
+  letter-spacing: 64px;
+  margin-left: 60px;
+}
+
+.piano {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.piano .key {
+  position: relative;
+  border: 1px solid #333;
+}
+
+.piano .white {
+  background-color: ivory;
+  width: 75px;
+  height: 300px;
+}
+
+.piano .black {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  background-color: black;
+  width: 36px;
+  height: 200px;
+  margin-left: -18px;
+  margin-right: -18px;
+  z-index: 1;
+}
+
+.piano .black div {
+  width: 34px;
+  height: 20px;
+  border-top: 2px solid #333;
+}
+
+.piano .active {
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
+}
+/*# sourceMappingURL=style.css.map */
