@@ -1,38 +1,55 @@
-const WHITE_KEYS: String[] = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
-const BLACK_KEYS: String[] = ['s', 'd', 'g', 'h', 'j'];
-const white_keys: NodeListOf<Element> = document.querySelectorAll('.white');
-const black_keys: NodeListOf<Element> = document.querySelectorAll('.black');
+class Piano {
+  constructor(
+    private WHITE_KEYS: String[],
+    private BLACK_KEYS: String[],
+    private white_keys: NodeListOf<Element>,
+    private black_keys: NodeListOf<Element>,
+    private keys: NodeListOf<Element>
+  ) {}
 
-const keys: NodeListOf<Element> = document.querySelectorAll('.key');
-
-// mouse click playSound event
-keys.forEach((key: Element) => {
-  key.addEventListener('mousedown', (): void => playSound(key));
-});
-
-// keyboard press playSound event
-document.addEventListener('keydown', e => {
-  //avoid multiply sounds with one press
-  if (e.repeat) return;
-
-  //find key in white or black keys
-  for (let i = 0; i < WHITE_KEYS.length; i++) {
-    if (WHITE_KEYS[i] === e.key) playSound(white_keys[i]);
+  // mouse click playSound event
+  mouseEvent() {
+    this.keys.forEach((key: Element) => {
+      key.addEventListener('mousedown', (): void => this.playSound(key));
+    });
   }
-  for (let i = 0; i < BLACK_KEYS.length; i++) {
-    if (BLACK_KEYS[i] === e.key) {
-      playSound(black_keys[i]);
-    }
-  }
-});
 
-//Play sound function
-const playSound = (e: any): void => {
-  let audio = new Audio(`./notes/${e.dataset.note}.mp3`);
-  audio.currentTime = 0;
-  audio.play();
-  e.classList.add('active');
-  setTimeout(() => {
-    e.classList.remove('active');
-  }, 200);
-};
+  // keyboard press playSound event
+  keaboardEvent() {
+    document.addEventListener('keydown', e => {
+      //avoid multiply sounds with one press
+      if (e.repeat) return;
+      //find key in white or black keys
+      for (let i = 0; i < this.WHITE_KEYS.length; i++) {
+        if (this.WHITE_KEYS[i] === e.key) this.playSound(this.white_keys[i]);
+      }
+      for (let i = 0; i < this.BLACK_KEYS.length; i++) {
+        if (this.BLACK_KEYS[i] === e.key) this.playSound(this.black_keys[i]);
+      }
+    });
+  }
+
+  //Play sound method
+  playSound(e: any): void {
+    let audio = new Audio(`./notes/${e.dataset.note}.mp3`);
+    audio.currentTime = 0;
+    audio.play();
+    e.classList.add('active');
+    setTimeout(() => {
+      e.classList.remove('active');
+    }, 200);
+  }
+}
+
+//add new instance of Piano class
+const piano = new Piano(
+  ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
+  ['s', 'd', 'g', 'h', 'j'],
+  document.querySelectorAll('.white'),
+  document.querySelectorAll('.black'),
+  document.querySelectorAll('.key')
+);
+
+//call of event functions
+piano.mouseEvent();
+piano.keaboardEvent();
